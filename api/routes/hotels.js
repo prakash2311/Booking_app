@@ -28,9 +28,50 @@ router.put("/:id", async (req,res) => {
     
     })
 //DELETE
+router.delete("/:id", async (req,res) => {
+
+    try{
+        await Hotel.findByIdAndDelete(
+            req.params.id
+        );
+        res.status(200).json("Hotel has been deleted..")
+    }catch(err){
+        res.status(500).json(err)
+    }
+    
+    })
 
 //GET
+router.get("/:id", async (req,res,next) => {
+
+    try{
+        const hotel = await Hotel.findById(
+            req.params.id
+        );
+        res.status(200).json(hotel)
+    }catch(err){
+        res.status(500).json(err)
+    }
+    
+    })
 
 //GET ALL
+
+router.get("/", async (req,res,next) => {
+ 
+    const failed = true
+    const err = new Error()
+    err.status = 404
+    err.message = "Sorry not found!" 
+    if (failed) return next(err)
+
+    try{
+        const hotels = await Hotel.findById("absd");
+        res.status(200).json(hotels)
+    }catch(err){
+        next(err)
+    }
+    
+    })
 
 export default router;
