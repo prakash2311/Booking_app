@@ -37,7 +37,7 @@ export const deleteHotel =async (req,res,next)=> {
 
 export const getHotel =async (req,res,next)=> {
 
-    const newHotel = new Hotel(req.body)
+    const Hotel = new Hotel(req.body)
 
     try{
         const hotel = await Hotel.findById(
